@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\flask-restx-project\HRIS-Backend-App\venv"
+VIRTUAL_ENV="D:\flask-restx-project\sales-customer-project\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
