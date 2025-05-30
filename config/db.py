@@ -1,16 +1,20 @@
 import psycopg2
 from flask import current_app, g
+from config.config import Config
+from psycopg2.extras import RealDictCursor
 
 def get_db(): 
     if 'db' not in g: 
         g.db = psycopg2.connect(
-            host=current_app.config['DB_HOST'],
-            port=current_app.config['DB_PORT'],
-            dbname=current_app.config['DB_NAME'],
-            user=current_app.config['DB_USER'],
-            password=current_app.config['DB_PASSWORD']
+            host=Config.DB_HOST,
+            port=Config.DB_PORT,
+            dbname=Config.DB_NAME,
+            user=Config.DB_USER,
+            password=Config.DB_PASSWORD, 
+            cursor_factory=RealDictCursor
         )
-        return g.db
+    return g.db  # ✅ pindahkan return ke luar blok if
+
     
 def close_db(e=None):
     db = g.pop('db', None)

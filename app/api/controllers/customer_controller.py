@@ -1,7 +1,8 @@
 from flask_restx import Resource, Namespace, reqparse
 from flask import jsonify, request
 
-# Controllers
+# Services
+from ..services.customer_service.get_list_customers import get_list_customers
 
 # Models 
 from ..models.customer_model import (
@@ -16,7 +17,7 @@ class Customers(Resource):
     # Customers Details 
     @api.response(200, "Return Customers List", response_list_customers )
     def get(self): 
-        response_data = "On Progress"
+        response_data = get_list_customers()
         return jsonify(
             {
                 "code": "200",

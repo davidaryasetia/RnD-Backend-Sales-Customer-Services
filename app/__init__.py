@@ -8,8 +8,8 @@ app = Flask(__name__)
 
 api = Api(
         app,
-        title="Research Project",
-        description="New Initialize Backend Project in Sales Customers", 
+        title="RnD Project (Sales Customers Management)",
+        description="New Initialize Backend Project With Flask with existing structure project", 
         version="1.0"
 )
 
