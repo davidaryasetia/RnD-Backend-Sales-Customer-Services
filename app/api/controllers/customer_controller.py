@@ -2,20 +2,25 @@ from flask_restx import Resource, Namespace, reqparse
 from flask import jsonify, request
 
 # Services
-from ..services.customer_service.get_list_customers import get_list_customers
+from ..services.customer_service.customers import (
+    get_list_customers, 
+
+)
 
 # Models 
 from ..models.customer_model import (
     api, 
-    response_list_customers, 
+    get_list_customer_parameter, 
+    get_detail_customer_parameter,
+    get_delete_customer_parameter, 
 ) 
 
 
 @api.route("")
 class Customers(Resource): 
 
-    # Customers Details 
-    @api.response(200, "Return Customers List", response_list_customers )
+    # List Customers Data 
+    @api.response(200, "Return Customers List", get_list_customer_parameter )
     def get(self): 
         response_data = get_list_customers()
         return jsonify(
@@ -28,7 +33,7 @@ class Customers(Resource):
     
     @api.route("/<int:customer_id>")
     class customer_details(Resource): 
-        @api.response(200, "Return Customer Details")
+        @api.response(200, "Return Customer Details", get_detail_customer_parameter)
         def get(self, customer_id): 
             result="On Progress"
             return jsonify({
@@ -36,3 +41,10 @@ class Customers(Resource):
                 "message": "Data Status Ok", 
                 "data": result
             })
+        
+
+    # Delete Customer Details
+    @api.response(200, "Return Customers Delete", get_delete_customer_parameter)
+    def delete(self, customerid): 
+        
+        
