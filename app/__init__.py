@@ -2,7 +2,10 @@ from flask import Flask, redirect
 from flask_restx import Api
 from config.db import close_db
 
-from .api.controllers import customer_controller
+from .api.controllers import (
+    customer_controller, 
+    employees_controller, 
+)
 
 app = Flask(__name__)
 
@@ -23,3 +26,4 @@ app.teardown_appcontext(close_db)
 
 # Register Common API
 api.add_namespace(customer_controller.api, path="/customers")
+api.add_namespace(employees_controller.api, path="/employees")
