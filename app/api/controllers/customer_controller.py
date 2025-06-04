@@ -2,9 +2,9 @@ from flask_restx import Resource, Namespace, reqparse
 from flask import jsonify, request
 
 # Services
-from ..services.customer_service.customers import (
-    get_list_customers, 
-
+from ..services.customer.customers import (
+    get_list_customers,
+    delete_customer, 
 )
 
 # Models 
@@ -42,9 +42,13 @@ class Customers(Resource):
                 "data": result
             })
         
-
-    # Delete Customer Details
-    @api.response(200, "Return Customers Delete", get_delete_customer_parameter)
-    def delete(self, customerid): 
-        
-        
+    @api.response(200, "Return Customer Delete", get_delete_customer_parameter)
+    def delete(self, customer_id): 
+        delete_customer(customer_id)
+        return jsonify({
+            "code": "200", 
+            "message": "Customer Deleted Successfully", 
+            "data" : {
+                "customer_id": customer_id
+            }
+        })

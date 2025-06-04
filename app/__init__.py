@@ -15,7 +15,7 @@ api = Api(
         version="1.0"
 )
 
-@app.route('/')
+@app.route('/api/sales_management')
 def redirecting(): 
     return redirect(api_prefix)
 

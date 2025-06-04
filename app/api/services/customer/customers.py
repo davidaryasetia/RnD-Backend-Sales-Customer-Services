@@ -24,7 +24,7 @@ def get_list_customers():
     return response
 
 
-def delete_customer( customerid): 
+def delete_customer(customer_id: int): 
     conn = get_db()
     cur = conn.cursor()
     cur.execute(
@@ -32,7 +32,11 @@ def delete_customer( customerid):
         DELETE FROM 
             customers
         WHERE 
-            customerid = %};
-        """,
-      
+            customer_id = %{customer_id}s
+        """,{ 
+            "customer_id": customer_id
+        }
     )
+
+    conn.commit()
+    return 
